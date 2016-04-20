@@ -12,4 +12,4 @@ zoomeye
 	│   └── util.py
 	└── web.py
 
-Need config util/configs.py first.
+Need set USER/PASSWORD in util/configs.py first.
