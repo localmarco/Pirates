@@ -10,5 +10,8 @@ from zoomeye.util.util import Client as tc
 if __name__ == '__main__':
     print "test Client"
     t = tc()
-    t.getToken()
-    print t.getDate("marco")
+    t.initToken()
+    print t.getToken()
+    r =  t.getResources()
+    print r
+

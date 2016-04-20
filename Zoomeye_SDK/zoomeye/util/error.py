@@ -3,3 +3,6 @@
 
 #HTTP
 HTTP_200=200
+
+HTTP_400='Bad request'
+HTTP_401='Bad request'

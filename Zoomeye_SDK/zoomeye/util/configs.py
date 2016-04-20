@@ -3,8 +3,13 @@
 
 import sys
 
-USER='cr_tbls@163.com'
-PASSWORD='Zoomeye1024'
+DEBUG=False
+
+USER=None
+PASSWORD=None
+
+#debug token
+TOKEN=None
 
 HTTP_URL='api.zoomeye.org'
 HTTP_PORT = 80 
@@ -20,5 +25,6 @@ LOGIN_PARAM="{'username':'%s', 'password':'%s'}"
 HTTP_HEADERS_LOGIN = {"Content-type":"application/x-www-form-urlencoded"}
 
 URL_RESOURCES ='/resources-info'
-HTTP_HEADERS = {"Content-type":"application/json; charset=UTF-8"}
+HTTP_HEADERS_RESOURCE ="Authorization" 
+
 
