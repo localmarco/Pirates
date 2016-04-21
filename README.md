@@ -1,6 +1,15 @@
 # Pirates
 Pirates for zoomeye
 
-有道:http://163.fm/VGNIWVK
+部分资料在有道:http://163.fm/VGNIWVK
 
-2016/4/18 星期一
+Pirates:
+	daviddone
+		zoomeye/seebug app for android
+	CharellkingQu
+		zoomeye api for ruby
+	localmarco
+		zoomeye api for python
+
+
+
