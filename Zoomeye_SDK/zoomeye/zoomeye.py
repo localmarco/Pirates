@@ -5,24 +5,19 @@ import json
 import httplib
 
 """ Debug """
-DEBUG = True
-USER = None
-PASSWORD = None
-TOKEN = None
-
+DEBUG = False
 
 HTTP_URL = 'api.zoomeye.org'
 URL_LOGIN = '/user/login'
 URL_RESOURCES = '/resources-info'
 
-__all__ = ["Zoomeye"]
+#__all__ = [ "Zoomeye" ]
 
 class Zoomeye(object):
     token = None
     client = None
 
     def __init__(self, https = False):
-        self.token = TOKEN
         if https is True:
             self.client = httplib.HTTPSConnection(HTTP_URL)
         else:
@@ -34,12 +29,8 @@ class Zoomeye(object):
 
     def login(self):
         """ return {http code,token} """
-        if DEBUG is True:
-            username = USER
-            password = PASSWORD
-        else:
-            username = raw_input('Username: username:')
-            password = raw_input('Password: password:')
+        username = raw_input('Username: username:')
+        password = raw_input('Password: password:')
 
         data = {
                 'username':username,
