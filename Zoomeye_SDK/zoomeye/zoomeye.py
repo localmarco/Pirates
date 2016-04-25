@@ -14,7 +14,6 @@ __all__ = ["ZoomEye", "Resource", "Host", "Web" ]
 class ZoomEye(object):
     https = False
     token = None
-    httpcode = None
 
     def __init__(self, https = False):
         self.https = https
