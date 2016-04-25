@@ -14,6 +14,6 @@ setup (
     author_email = 'marco.tbls@gmail.com',
     description = 'zoomeye api',
     packages = packages,
-    License = 'LGPL',
+    license = 'LGPL',
     url = 'git@github.com:localmarco/Pirates.git/Zoomeye_SDK'
 )
