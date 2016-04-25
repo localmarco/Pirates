@@ -2,14 +2,17 @@
 # -*- coding: UTF-8 -*-
 
 import json
-import httplib
+import requests
 
 """ Debug """
 DEBUG = True
 
-HTTP_URL = 'api.zoomeye.org'
+URL_LOGIN = 'http://api.zoomeye.org/user/login'
+URL_RESPONSE = 'http://api.zoomeye.org/resources-info'
+URL_HOST_SEARCH = 'http://api.zoomeye.org/host/search'
+URL_WEB_SEARCH = 'http://api.zoomeye.org/web/search'
 
-__all__ = ["ZoomEye", "Resource", "Host", "Web" ]
+__all__ = ["ZoomEye", "Response", "Host", "Web" ]
 
 class ZoomEye(object):
     https = False
@@ -27,82 +30,59 @@ class ZoomEye(object):
                 'password':password
                 } 
         try:
-            if self.https is True:
-                client = httplib.HTTPSConnection(HTTP_URL)
-            else:
-                client = httplib.HTTPConnection(HTTP_URL)
-            client.request('POST', '/user/login', json.dumps(data))
-            result = client.getresponse()
-            if result.status == httplib.OK:
-                self.token = json.loads(result.read())['access_token'] 
+            res = requests.post(url = URL_LOGIN, data = json.dumps(data))
+            if res.status_code == 200:
+                self.token = json.loads(res.content)['access_token'] 
         except Exception as e:
             if DEBUG is True:
                 print e
             self.token = None
-        if client:
-            client.close()
-        return result.status, self.token
+        return res.status_code, self.token
 
     def _get(self, url):
         """ return {http code,{result}} """
-        code = None
-        data = None
         try:
-            if self.https is True:
-                client = httplib.HTTPSConnection(HTTP_URL)
-            else:
-                client = httplib.HTTPConnection(HTTP_URL)
-            client.request('GET', url, 
-                    headers = { 'Authorization' : "JWT "+self.token })
-            result = client.getresponse()
-            code = result.status
-            data = result.read()
+            res = requests.get(url=url, headers = { 'Authorization' : "JWT "+self.token })
         except Exception as e:
-            if DEBUG is True:
-                print e
-        if client:
-            client.close()
-
-        if code == httplib.OK:
-            return code, data
-        else:
-            return code, httplib.responses[code]
+            pass
+        return res.status_code, res.content
 
     def getResponse(self):
         data = None
         if self.token is not None:
-            result = self._get('/resources-info')
-            print "[--] getResponse ---"
-            if result[0] == httplib.OK:
+            result = self._get(URL_RESPONSE)
+            if result[0] == 200:
                 data = result[1]
         return data
 
 
     def hostSearch(self, query, page = None, facet = None):
         data = None
-        url = "/host/search?query=%s" %(str(query))
+        url = "%s?query=%s" %(URL_HOST_SEARCH, str(query))
         if page is not None:
             url = "%s&page=%d" %(str(url), int(page))
         if facet is not None:
             url = "%s&facet=%s" %(str(url), str(facet))
 
         if self.token is not None:
+            print "[HOST URL]" + url
             result = self._get(url)
-            if result[0] == httplib.OK:
+            if result[0] == 200:
                 data = result[1]
         return data
 
 
     def webSearch(self, query, page = None, facet = None):
         data = None
-        url = "/web/search?query=%s" %(str(query))
+        url = "%s?query=%s" %(URL_WEB_SEARCH, str(query))
         if page is not None:
             url = "%s&page=%d" %(str(url), int(page))
         if facet is not None:
             url = "%s&facet=%s" %(str(url), str(facet))
         if self.token is not None:
+            print "[WEB URL]" + url
             result = self._get(url)
-            if result[0] == httplib.OK:
+            if result[0] == 200:
                 data = result[1]
         return data
 
