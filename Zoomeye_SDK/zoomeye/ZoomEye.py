@@ -1,11 +1,30 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+"""
+ZoomEye.api
+~~~~~~~~~~~~
+
+This module implements the ZoomEye API.
+
+:copyright: (c) 2016 by Marco
+:license: Apache2, see LICENSE for more details.
+
+"""
+__doc__ = """
+    ZoomEye()
+       |
+     login
+       |   |---getResponse()-> Response()
+       |___|---hostSearch() -> Host()
+           |---webSearch()  -> Web()
+"""
+
 import json
 import requests
 
 """ Debug """
-DEBUG = True
+DEBUG = False
 
 URL_LOGIN = 'http://api.zoomeye.org/user/login'
 URL_RESPONSE = 'http://api.zoomeye.org/resources-info'
@@ -13,6 +32,27 @@ URL_HOST_SEARCH = 'http://api.zoomeye.org/host/search'
 URL_WEB_SEARCH = 'http://api.zoomeye.org/web/search'
 
 __all__ = ["ZoomEye", "Response", "Host", "Web" ]
+
+HOST_FACETS_PROPS = [
+    'app',      #Application
+    'device',   #Device types
+    'service',  #Services types
+    'os',       #Operating systems
+    'port',     #ports
+    'country',  #countries summary
+    'city'      #city summary
+    ]
+WEB_FACETS_PROPS = [
+    'webapp',   #Web Application
+    'component',#Web Component
+    'framework',#Web framework
+    'frontend ',#Web frontend
+    'server',   #Web server
+    'waf',      #Web Firewall
+    'os',       #Operating systems
+    'country',  #countries summary
+    'city'      #city summary
+    ]
 
 class ZoomEye(object):
     https = False
@@ -22,7 +62,11 @@ class ZoomEye(object):
         self.https = https
 
     def login(self):
-        """ return {http code,token} """
+        """
+            login
+            :return {http code,token}
+            :rtype: ZoomEye.login
+        """
         username = raw_input('Username:')
         password = raw_input('Password:')
         data = {
@@ -40,7 +84,10 @@ class ZoomEye(object):
         return res.status_code, self.token
 
     def _get(self, url):
-        """ return {http code,{result}} """
+        """ 
+            _get
+            :return: {http code,{result}} 
+        """
         try:
             res = requests.get(url=url, headers = { 'Authorization' : "JWT "+self.token })
         except Exception as e:
@@ -48,6 +95,11 @@ class ZoomEye(object):
         return res.status_code, res.content
 
     def getResponse(self):
+        """
+            getResponse
+            :return: String of result data
+            :rtype: ZoomEye.getResponse
+        """
         data = None
         if self.token is not None:
             result = self._get(URL_RESPONSE)
@@ -57,6 +109,14 @@ class ZoomEye(object):
 
 
     def hostSearch(self, query, page = None, facet = None):
+        """
+            hostSearch
+            :param query: Query string
+            :param page: The page number to paging(default:1)
+            :param facet: A comma-separated list of properties to get summary information on query
+            :return: String of result data
+            :rtype: ZoomEye.hostSearch
+        """
         data = None
         url = "%s?query=%s" %(URL_HOST_SEARCH, str(query))
         if page is not None:
@@ -71,8 +131,16 @@ class ZoomEye(object):
                 data = result[1]
         return data
 
-
     def webSearch(self, query, page = None, facet = None):
+        """
+            webSearch
+            :param query: Query string
+            :param page: The page number to paging(default:1)
+            :param facet: A comma-separated list of properties to get summary information on query
+            :return: String of result data
+            :rtype: ZoomEye.webSearch
+        """
+
         data = None
         url = "%s?query=%s" %(URL_WEB_SEARCH, str(query))
         if page is not None:
@@ -86,25 +154,9 @@ class ZoomEye(object):
                 data = result[1]
         return data
 
-class Response(object):
-    def __init__(self, response):
-        try:
-            self.response = json.loads(response)
-        except Exception as e:
-            if DEBUG is True:
-                print e
-            self.response = None
-
-    def getPlan(self):
-        return self.response['plan']
-
-    def getHostSearch(self):
-        return self.response['resources']['host-search']
-
-    def getWebSearch(self):
-        return self.response['resources']['web-search']
-
-
+"""
+    Base classes of Host/Web
+"""
 class Names(object):
     def __init__(self, data):
         if 'zh-CN' in data:
@@ -228,7 +280,31 @@ class WebDevice(object):
             self.geoinfo = Geoinfo(data['geoinfo'])
         if 'server' in data:
             self.server = Server(data['server'])
+
+"""
+  parse ZoomEye.getResponse result
+"""
+class Response(object):
+    def __init__(self, response):
+        try:
+            self.response = json.loads(response)
+        except Exception as e:
+            if DEBUG is True:
+                print e
+            self.response = None
+
+    def getPlan(self):
+        return self.response['plan']
+
+    def getHostSearch(self):
+        return self.response['resources']['host-search']
+
+    def getWebSearch(self):
+        return self.response['resources']['web-search']
             
+"""
+  parse ZoomEye.hostSearch result
+"""
 class Host(object):
     devices = []
     def __init__(self, data):
@@ -249,6 +325,10 @@ class Host(object):
     def getDevice(self, index):
         if index >= 0 and index < len(self.devices):
             return self.devices[index]
+
+"""
+  parse ZoomEye.webSearch result
+"""
 class Web(object):
     devices = []
     def __init__(self, data):
@@ -283,16 +363,16 @@ if __name__ == '__main__':
         
     print "[-] Test Response"
     r = Response(c.getResponse())
-    print "HostSearch [%d]" %(r.getHostSearch())
-    print "WebSearch [%d]" %(r.getWebSearch())
+    print "[-] HostSearch [%d]" %(r.getHostSearch())
+    print "[-] WebSearch [%d]" %(r.getWebSearch())
     hostSearch = raw_input('Host Search:')
     host = Host(c.hostSearch(hostSearch))
-    print "Host Search Totle[%d] Len [%d]" %(host.total, host.getResultLen())
+    print "[-] Host Search Totle[%d] Len [%d]" %(host.total, host.getResultLen())
     for i in host.devices:
-        print "[-][%s]\t [%s]" %(i.ip, i.portinfo.service)
+        print "[--][%s]\t [%s]" %(i.ip, i.portinfo.service)
     WebSearch = raw_input('Web Search:')
     web = Web(c.webSearch(hostSearch))
-    print "Web Search Totle[%d] Len [%d]" %(web.total, web.getResultLen())
+    print "[-] Web Search Totle[%d] Len [%d]" %(web.total, web.getResultLen())
     for i in web.devices:
-        print "[-][%s]\t [%s]" %(i.ip, i.site)
+        print "[--][%s]\t [%s]" %(i.ip, i.site)
 

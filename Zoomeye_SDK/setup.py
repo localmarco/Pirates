@@ -5,14 +5,14 @@ import os
 import sys
 from setuptools import setup
 
-packages = [ 'zoomeye' ]
+packages = [ 'ZoomEye' ]
 setup (
-    name = 'zoomeye',
+    name = 'ZoomEye',
     version = '1.1',
-    py_modules = ['zoomeye'],
+    py_modules = ['ZoomEye'],
     author = 'marco',
     author_email = 'marco.tbls@gmail.com',
-    description = 'zoomeye api',
+    description = 'ZoomEye api',
     packages = packages,
     license = 'LGPL',
     url = 'git@github.com:localmarco/Pirates.git/Zoomeye_SDK'
