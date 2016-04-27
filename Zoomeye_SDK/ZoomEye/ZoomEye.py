@@ -371,7 +371,7 @@ if __name__ == '__main__':
     for i in host.devices:
         print "[--][%s]\t [%s]" %(i.ip, i.portinfo.service)
     WebSearch = raw_input('Web Search:')
-    web = Web(c.webSearch(hostSearch))
+    web = Web(c.webSearch(WebSearch))
     print "[-] Web Search Totle[%d] Len [%d]" %(web.total, web.getResultLen())
     for i in web.devices:
         print "[--][%s]\t [%s]" %(i.ip, i.site)
