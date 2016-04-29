@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:background="#fff"
+	android:orientation="vertical"
+    android:layout_height="300dip">
+    <RelativeLayout 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	 <TextView
+		android:id="@+id/tv_repair_type"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dip"
+		android:padding="10dip"
+		android:layout_centerInParent="true"
+		android:textColor="@color/black"
+		android:text="请先登录"
+		android:textSize="16sp" />
+	  
+	</RelativeLayout>
+   
+    <RelativeLayout 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+	  <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+			android:gravity="top"
+            android:hint="用户名"
+            android:text="2446566286@qq.com"
+			android:inputType="text"
+			android:background="#909090"
+            android:maxLength="30"
+            android:padding="5dp" />
+		<EditText
+            android:id="@+id/et_password"
+            android:layout_below="@id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+            android:layout_marginTop="10dip"
+			android:gravity="top"
+            android:hint="密码"
+            android:text="123asd"
+			android:inputType="textPassword"
+			android:background="#909090"
+            android:maxLength="30"
+            android:padding="5dp" />	  
+	</RelativeLayout>
+    <RelativeLayout 
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content">
+			  
+		    <TextView
+		        android:id="@+id/tv_login_cancel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dip"
+			android:padding="10dip"
+			android:textColor="@color/black"
+			android:text="取消"
+			android:textSize="16sp" />
+		    
+		      <TextView
+			android:id="@+id/tv_login_confirm"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="20dip"
+			android:padding="10dip"
+			android:textColor="@color/black"
+			android:text="确定"
+			android:textSize="16sp" />
+	</RelativeLayout>
+    
+</LinearLayout>

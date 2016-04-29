@@ -1,0 +1,194 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/ll_home"
+    android:background="@color/white"
+     >
+	<include android:id="@+id/main_header" layout="@layout/include_header_bar"></include>
+	 <ScrollView
+	     android:id="@+id/sc_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:scrollbars="none" >	
+	 <LinearLayout
+	     	android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+		<RelativeLayout
+		    android:id="@+id/rl_home_banner"
+            android:layout_width="fill_parent"
+            android:layout_height="180dip"
+            android:background="@color/gray"
+            >
+           <include layout="@layout/banner"/>
+        </RelativeLayout>
+     <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="96dip"
+            android:visibility="visible"
+            android:background="@color/white"
+            android:orientation="horizontal">
+          <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/white"
+            >
+            <ImageView
+                android:id="@+id/iv_seebug_1"
+                android:layout_marginLeft="18dip"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/seebug1" />
+           	 <TextView
+                android:id="@+id/tv_seebug_1"
+                android:layout_below="@id/iv_seebug_1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/text_second"
+                android:text="漏洞数"
+                android:textSize="12sp" />
+           	  <TextView
+           	      android:id="@+id/tv_seebug1_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tv_seebug_1"
+                android:text="50,675"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout>
+         <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            >
+            <ImageView
+                android:id="@+id/iv_seebug2"
+                android:layout_marginLeft="18dip"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/seebug2" />
+           	 <TextView
+           	     android:id="@+id/tv_seebug2"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/iv_seebug2"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="PoC 数"
+                android:textColor="@color/text_second"
+                android:textSize="12sp" />
+           	 	 <TextView
+           	 	     android:id="@+id/tv_seebug2_txt"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/tv_seebug2"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="43,114"
+               android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout>
+         <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            >
+            <ImageView
+                android:id="@+id/iv_seebug3"
+                android:layout_marginLeft="18dip"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/seebug3" />
+           	 <TextView
+           	     android:id="@+id/tv_seebug3"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/iv_seebug3"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="发放现金"
+                android:textColor="@color/text_second"
+                android:textSize="12sp" />
+           	 <TextView
+           	     android:id="@+id/tv_seebug3_txt"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/tv_seebug3"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="￥877,395"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout>
+         <RelativeLayout
+            android:id="@+id/rl_home_intrest" 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            >
+            <ImageView
+                android:id="@+id/iv_home_intrest"
+                android:layout_marginLeft="18dip"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/seebug4" />
+           	 <TextView
+                android:id="@+id/tv_seebug4"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/iv_home_intrest"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="悬赏金额"
+                android:textColor="@color/text_second"
+                android:textSize="12sp" />
+           	  <TextView
+           	      android:id="@+id/tv_seebug4_txt"
+                android:layout_width="wrap_content"
+                android:layout_below="@id/tv_seebug4"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="￥877,395"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout> 
+     </LinearLayout>  
+         <View 
+            android:background="@color/gray" 
+            android:layout_width="fill_parent" 
+            android:layout_height="1dip" 
+             />
+         <LinearLayout 
+			android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dip"
+				android:padding="10dip"
+				android:textColor="@color/black"
+				android:text="精选漏洞"
+				android:textSize="20sp" />
+		</LinearLayout>
+         <com.daviddone.voa.customview.NoScrollListView 
+		    android:id="@+id/lv_home_recommand"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:divider="@null"
+		    ></com.daviddone.voa.customview.NoScrollListView>
+         </LinearLayout>
+        </ScrollView> 
+</LinearLayout>

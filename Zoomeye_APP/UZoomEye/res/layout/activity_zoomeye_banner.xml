@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_header_bar" >
+    </include>
+<ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:scrollbars="none" >
+			<TextView
+			    android:id="@+id/tv_zoomeye_banner"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="10dip"
+				android:layout_marginLeft="10dip"
+				android:background="@color/white"
+				android:padding="10dip"
+				android:textColor="@color/black"
+				android:text=""
+				android:textSize="14sp" />
+		
+	</ScrollView>
+</LinearLayout>
